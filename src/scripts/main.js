@@ -4,19 +4,19 @@ const promise1 = new Promise((resolve, reject) => {
   document.addEventListener('click', (eve) => {
     if (eve.button === 0) {
       clearTimeout(timerId);
-      resolve();
+      resolve('First promise was resolved');
     }
   });
 
   const timerId = setTimeout(() => {
-    reject(new Error());
+    reject(new Error('First promise was rejected'));
   }, 3000);
 });
 
 const promise2 = new Promise((resolve, reject) => {
   document.addEventListener('click', (eve) => {
     if (eve.button === 0 || eve.button === 2) {
-      resolve();
+      resolve('Second promise was resolved');
     }
   });
 });
@@ -35,30 +35,30 @@ const promise3 = new Promise((resolve, reject) => {
     }
 
     if (leftClicked && rightClicked) {
-      resolve();
+      resolve('Third promise was resolved');
     }
   });
 });
 
 promise1
-  .then(() => {
-    success('First promise was resolved');
+  .then((message) => {
+    success(message);
   })
-  .catch(() => {
-    error('First promise was rejected');
+  .catch((message) => {
+    error(message);
   });
 
 promise2
-  .then(() => {
-    success('Second promise was resolved');
+  .then((message) => {
+    success(message);
   })
   .catch(() => {
-    error();
+    error('Second promise was rejected');
   });
 
 promise3
-  .then(() => {
-    success('Third promise was resolved');
+  .then((message) => {
+    success(message);
   })
   .catch(() => {
     error('Third promise was rejected');
