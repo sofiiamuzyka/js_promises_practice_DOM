@@ -9,7 +9,8 @@ const promise1 = new Promise((resolve, reject) => {
   });
 
   const timerId = setTimeout(() => {
-    reject(new Error('First promise was rejected'));
+    // eslint-disable-next-line prefer-promise-reject-errors
+    reject('First promise was rejected');
   }, 3000);
 });
 
@@ -21,10 +22,10 @@ const promise2 = new Promise((resolve, reject) => {
   });
 });
 
-let leftClicked = false;
-let rightClicked = false;
-
 const promise3 = new Promise((resolve, reject) => {
+  let leftClicked = false;
+  let rightClicked = false;
+
   document.addEventListener('click', (eve) => {
     if (eve.button === 0) {
       leftClicked = true;
